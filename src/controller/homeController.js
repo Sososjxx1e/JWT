@@ -1,43 +1,54 @@
 const { json } = require("body-parser");
-import mysql from "mysql2";
+
+import { render } from "ejs";
+import Userservies from "../services/Userservies";
 
 // get the client
-
-// create the connection to database
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "jwt",
-});
 
 const handleHelloworld = (req, res) => {
   const name = "viettran";
   return res.render("home.ejs");
 };
-const handleUserPage = (req, res) => {
+const handleUserPage = async (req, res) => {
   //model  => get data from database
-  return res.render("user.ejs");
+  let userList = await Userservies.getUserList();
+  await Userservies.deleteUser;
+  return res.render("user.ejs", { userList });
 };
 const handleCreateUser = (req, res) => {
   let user = req.body.user;
   let email = req.body.email;
   let password = req.body.password;
+  Userservies.createNewUser(email, password, user);
 
-  connection.query(
-    "insert into users (email,password,username) values (?,?,?)",
-    [email, password, user],
-    function (err, results, fields) {
-      if (err) {
-        console.log(err);
-      }
-      console.log(results); // results contains rows returned by server
-    }
-  );
-  return res.send("handleCreateUser ");
+  return res.redirect("/about");
+};
+const handledeleteUser = async (req, res) => {
+  await Userservies.deleteUser(req.params.ID);
+  return res.redirect("/about");
+};
+const handleupdate = async (req, res) => {
+  let id = req.params.ID;
+  let user = await Userservies.getUserbyID(id);
+  let userData = {};
+  if (user && user.length > 0) {
+    userData = user[0];
+  }
+  return res.render("userupdate.ejs", { userData });
+};
+const handleupdateUser = async (req, res) => {
+  let email = req.body.email;
+  let id = req.body.id;
+  let user = req.body.user;
+  await Userservies.handleupdateUserByID(email, user, id);
+  return res.redirect("/about");
 };
 
 module.exports = {
   handleHelloworld,
   handleCreateUser,
   handleUserPage,
+  handledeleteUser,
+  handleupdate,
+  handleupdateUser,
 };

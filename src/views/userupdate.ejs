@@ -28,11 +28,14 @@
     <div class="container mx-auto">
       <div class="row">
         <div class="user-form col-sm-4 col-12">
-          <h1>create user:</h1>
-          <form method="post" action="/users/create-actions">
+          <h1>edit user:</h1>
+
+          <form method="post" action="/users/user-update">
+            <input hidden value="<%= userData.ID%>" name="id" />
             <div class="mb-3">
               <label for="user" class="form-label">Username</label>
               <input
+                value="<%=userData.username%>"
                 required
                 name="user"
                 type="text"
@@ -45,6 +48,7 @@
               <label for="email" class="form-label">Email address</label>
               <input
                 required
+                value="<%=userData.email%>"
                 name="email"
                 type="email"
                 class="form-control"
@@ -56,56 +60,10 @@
               </div>
             </div>
 
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label"
-                >Password</label
-              >
-              <input
-                required
-                name="password"
-                type="password"
-                class="form-control"
-                id="exampleInputPassword1"
-              />
-            </div>
             <div class="col-12">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </form>
-        </div>
-        <div class="table-user mt-3">
-          <table class="table table-hover table-bordered">
-            <h1>table user:</h1>
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Email</th>
-                <th scope="col">Username</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% userList.forEach(function(item,index){ %>
-              <tr>
-                <th scope="row"><%= index + 1 %></th>
-                <td><%= item.email %></td>
-                <td><%= item.username %></td>
-                <td>
-                  <a class="btn btn-warning" href="/updateuser/<%= item.ID %>">
-                    Edit
-                  </a>
-                  <form
-                    style="display: inline"
-                    action="/deleteuser/<%= item.ID %>"
-                    method="post"
-                  >
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                  </form>
-                </td>
-              </tr>
-              <% }) %>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
