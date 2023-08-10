@@ -47,7 +47,7 @@ const getUserbyID = async (id) => {
   });
   try {
     const [rows, fields] = await connection.execute(
-      "select * from users where ID = ?",
+      "select * from users where id = ?",
       [id]
     );
     return rows;
@@ -64,7 +64,7 @@ const deleteUser = async (id) => {
   });
   try {
     const [rows, fields] = await connection.execute(
-      "delete from users where ID = ?",
+      "delete from users where id = ?",
       [id]
     );
     return rows;
@@ -81,7 +81,7 @@ const handleupdateUserByID = async (email, user, id) => {
   });
   try {
     const [rows, fields] = await connection.execute(
-      "UPDATE users set email = ? ,username = ?  where ID = ?",
+      "UPDATE users set email = ? ,username = ?  where id = ?",
       [email, user, id]
     );
     return rows;

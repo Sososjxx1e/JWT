@@ -91,12 +91,12 @@
                 <td><%= item.email %></td>
                 <td><%= item.username %></td>
                 <td>
-                  <a class="btn btn-warning" href="/updateuser/<%= item.ID %>">
+                  <a class="btn btn-warning" href="/updateuser/<%= item.id %>">
                     Edit
                   </a>
                   <form
                     style="display: inline"
-                    action="/deleteuser/<%= item.ID %>"
+                    action="/deleteuser/<%= item.id %>"
                     method="post"
                   >
                     <button class="btn btn-danger" type="submit">Delete</button>
