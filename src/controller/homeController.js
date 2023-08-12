@@ -30,10 +30,10 @@ const handledeleteUser = async (req, res) => {
 const handleupdate = async (req, res) => {
   let id = req.params.ID;
   let user = await Userservies.getUserbyID(id);
-  let userData = {};
-  if (user && user.length > 0) {
-    userData = user[0];
-  }
+  let userData = user;
+  // if (user && user.length > 0) {
+  //   userData = user[0];
+  // }
   return res.render("userupdate.ejs", { userData });
 };
 const handleupdateUser = async (req, res) => {
