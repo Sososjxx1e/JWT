@@ -24,6 +24,31 @@ const createNewUser = async (email, password, user) => {
   }
 };
 const getUserList = async () => {
+  //test realation ship
+  try {
+    let a = await db.User.findOne({
+      where: { id: 1 },
+      attributes: ["id", "email", "username"],
+      include: { model: db.group, attributes: ["id", "name", "description"] },
+      raw: true,
+      nest: true,
+    });
+    let b = await db.role.findAll({
+      attributes: ["id", "url", "description"],
+      include: {
+        model: db.group,
+        attributes: ["id", "name", "description"],
+        where: { id: 1 },
+      },
+      raw: true,
+      nest: true,
+    });
+    console.log("cai gi day:", a);
+    console.log("cai gi day2:", b);
+  } catch (e) {
+    console.log(e.message);
+  }
+
   let user = [];
   user = await db.User.findAll();
   return user;
