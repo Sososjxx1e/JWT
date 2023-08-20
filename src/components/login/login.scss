@@ -1,0 +1,47 @@
+.red {
+    border: 1px solid red;
+}
+
+.green {
+    border: 1px solid green;
+}
+
+.yellow {
+    border: 1px solid yellow;
+}
+
+.login-container {
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    padding-top: 20px;
+
+    .content-left {
+        .brand {
+            margin-top: 50px;
+            text-transform: uppercase;
+            font-size: 25px;
+            color: #1877f2;
+        }
+
+        .detail {
+            font-size: 17px;
+
+        }
+    }
+
+    .content-right {
+        border-radius: 10px;
+
+        .input-height {
+            height: 50px;
+        }
+
+        .forgot-pass {
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
