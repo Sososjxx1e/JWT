@@ -1,27 +1,26 @@
 import "./App.scss";
 import Nav from "./components/Navigations/Nav";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Login from "./components/login/login";
-import Register from "./components/register/Register";
+
+import { useEffect, useState } from "react";
+import * as _ from "lodash";
+import Approute from "./routes/AppRoutes";
+import { useContext } from "react";
+import { UserContext } from "./context/Usercontext";
+
 function App() {
+  const [account, setAccount] = useState({});
+  const { user } = useContext(UserContext);
+
   return (
     <div className="App-Container">
-      {/* <Nav /> */}
-      <Switch>
-        <Route path="/about">about</Route>
-        <Route path="/news">news</Route>
-        <Route path="/contract">contract</Route>
-        <Route path="/Register">
-          <Register />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/" exact>
-          home
-        </Route>
-        <Route path="*">404 not found</Route>
-      </Switch>
+      {user && user.isloading ? (
+        <div>loading</div>
+      ) : (
+        <div>
+          <Nav />
+          <Approute />
+        </div>
+      )}
     </div>
   );
 }
