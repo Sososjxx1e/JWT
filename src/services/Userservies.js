@@ -43,8 +43,6 @@ const getUserList = async () => {
       raw: true,
       nest: true,
     });
-    console.log("cai gi day:", a);
-    console.log("cai gi day2:", b);
   } catch (e) {
     console.log(e.message);
   }
